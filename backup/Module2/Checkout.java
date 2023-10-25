@@ -5,7 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-//import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Checkout {
     RemoteWebDriver driver;
@@ -15,7 +16,7 @@ public class Checkout {
         this.driver = driver;
     }
 
-    public void navigateToCheckout() {
+    public void navigateToCheckout(){
         if (!this.driver.getCurrentUrl().equals(this.url)) {
             this.driver.get(this.url);
         }
@@ -30,19 +31,10 @@ public class Checkout {
             addressbtn.click();
             driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[1]/div/textarea[1]")).clear();
             driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[1]/div/textarea[1]")).sendKeys(addresString);
-
-            //WebDriverWait wait = new WebDriverWait(driver, 10);
-
-            // try {
-            //     wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[1]/div[2]/div[1]")));
-
-            // } catch(Exception e) {
-            //     return false;
-            // }
-
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             WebElement addbtn = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[2]/button[1]"));
             addbtn.click();
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Click on the "Add new address" button, enter the addressString in the address
              * text box and click on the "ADD" button to save the address
@@ -76,7 +68,8 @@ public class Checkout {
                     return true;
                 }
             }
-            
+
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
@@ -87,6 +80,7 @@ public class Checkout {
             System.out.println("Exception Occurred while selecting the given address: " + e.getMessage());
             return false;
         }
+
     }
 
     /*
@@ -94,11 +88,11 @@ public class Checkout {
      */
     public Boolean placeOrder() {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
+            // Find the "PLACE ORDER" button and click on it
             WebElement placeorderbtn = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/button[2]"));
             placeorderbtn.click();
             return false;
-
-            //return false;
 
         } catch (Exception e) {
             System.out.println("Exception while clicking on PLACE ORDER: " + e.getMessage());
@@ -111,7 +105,8 @@ public class Checkout {
      */
     public Boolean verifyInsufficientBalanceMessage() {
         try {
-            WebElement alert = driver.findElement(By.id("notistack-snackbar"));
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 07: MILESTONE 6
+           WebElement alert = driver.findElement(By.id("notistack-snackbar"));
             if(alert.isDisplayed()) {
                 if(alert.getText().equals("You do not have enough balance in your wallet for this purchase")) {
                     return true;

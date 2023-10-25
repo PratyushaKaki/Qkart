@@ -7,7 +7,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResult {
     WebElement parentElement;
@@ -23,6 +24,9 @@ public class SearchResult {
     public String getTitleofResult() {
         String titleOfSearchResult = "";
         titleOfSearchResult = parentElement.getText();
+        // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
+        // Find the element containing the title (product name) of the search result and
+        // assign the extract title text to titleOfSearchResult
         return titleOfSearchResult;
     }
 
@@ -33,6 +37,9 @@ public class SearchResult {
         try {
             WebElement sizechart = parentElement.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/button"));
             sizechart.click();
+
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
+            // Find the link of size chart in the parentElement and click on it
             return true;
         } catch (Exception e) {
             System.out.println("Exception while opening Size chart: " + e.getMessage());
@@ -48,6 +55,7 @@ public class SearchResult {
             Thread.sleep(2000);
             Actions action = new Actions(driver);
 
+            // Clicking on "ESC" key closes the size chart modal
             action.sendKeys(Keys.ESCAPE);
             action.perform();
             Thread.sleep(2000);
@@ -67,6 +75,7 @@ public class SearchResult {
             WebElement sizechart = parentElement.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/button"));
             status = sizechart.getText().equals("SIZE CHART");
 
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             /*
              * Check if the size chart element exists. If it exists, check if the text of
              * the element is "SIZE CHART". If the text "SIZE CHART" matches for the
@@ -86,8 +95,8 @@ public class SearchResult {
             WebDriver driver) {
         Boolean status = true;
         try {
-            //WebElement sizechartelm = driver.findElement(By.className("MuiDialog-paperScrollPaper"));
-            //WebElement table = driver.findElement(By.tagName("table"));
+            WebElement sizechartelm = driver.findElement(By.className("MuiDialog-paperScrollPaper"));
+            WebElement table = driver.findElement(By.tagName("table"));
 
             List<WebElement> thead = driver.findElement(By.tagName("thead")).findElements(By.tagName("th"));
             
@@ -117,6 +126,10 @@ public class SearchResult {
                     
                 }
             }
+            
+            
+            
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             /*
              * Locate the table element when the size chart modal is open
              * 
@@ -142,6 +155,8 @@ public class SearchResult {
         try {
             WebElement dropdown = driver.findElement(By.xpath("//*[@id='uncontrolled-native']"));
             status = dropdown.isDisplayed();
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
+            // If the size dropdown exists and is displayed return true, else return false
             return status;
         } catch (Exception e) {
             return status;

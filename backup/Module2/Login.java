@@ -1,12 +1,15 @@
+
 package QKART_SANITY_LOGIN.Module1;
 
-
+import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
 
 public class Login {
     RemoteWebDriver driver;
@@ -44,16 +47,8 @@ public class Login {
         // Click the login Button
         login_button.click();
 
-        // SLEEP_STMT_13: Wait for Login to Complete
         // Wait for Login action to complete
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.urlToBe("https://crio-qkart-frontend-qa.vercel.app/"));
-
-        // Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)							
-		// 	.withTimeout(30, TimeUnit.SECONDS) 			
-		// 	.pollingEvery(5, TimeUnit.SECONDS) 			
-		// 	.ignoring(NoSuchElementException.class);
-        // Thread.sleep(5000);
+        Thread.sleep(5000);
 
         return this.VerifyUserLoggedIn(Username);
     }
