@@ -18,6 +18,8 @@
         <parameter name = "TC5_AddressDetails" value = "Addr line 1 addr Line 2 addr line 3"></parameter>
         <parameter name = "TC6_ProductNameToSearch1" value = "Xtend Smart Watch"></parameter>
         <parameter name = "TC6_ProductNameToSearch2" value = "Yarine Floor Lamp"></parameter>
+        <parameter name = "TC7_ProductName" value = "Stylecon 9 Seater RHS Sofa Set "></parameter>
+        <parameter name = "TC7_Qty" value = "10"></parameter>
         <packages>
             <package name="QKART_TESTNG"></package>
         </packages>

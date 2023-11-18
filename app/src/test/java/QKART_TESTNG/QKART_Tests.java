@@ -79,7 +79,7 @@ public class QKART_Tests {
         //  logStatus("End TestCase", "Test Case 1: Verify user Registration : ", status
         //  ? "PASS" : "FAIL");
         //  takeScreenshot(driver, "EndTestCase", "TestCase1");
-        assertTrue(status, "Verify user Registration ");
+        assertTrue(status);
     }
     
     @Test(priority=2, groups={"Sanity"})
@@ -105,7 +105,7 @@ public class QKART_Tests {
         // If status is true, then registration succeeded, else registration has
         // failed. In this case registration failure means Success
         logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "FAIL" : "PASS");
-        assertFalse(status, "Verify user Registration");
+        assertFalse(status);
     }
 
     @Test(priority=3, groups={"Sanity"})
@@ -243,12 +243,12 @@ public class QKART_Tests {
         }
         // logStatus("TestCase 4", "End Test Case: Validated Size Chart Details", status ? "PASS" : "FAIL");
         // return status;
-        assertTrue(status, "Validated Size Chart Details");
+        assertTrue(status);
     }
 
     @Test(priority=5, groups={"Sanity"})
     @Parameters({"TC5_ProductNameToSearchFor", "TC5_ProductNameToSearchFor2", "TC5_AddressDetails"})
-    public void TestCase05() throws InterruptedException {
+    public void TestCase05(String TC5_ProductNameToSearchFor, String TC5_ProductNameToSearchFor2, String TC5_AddressDetails) throws InterruptedException {
         Boolean status;
         logStatus("Start TestCase", "Test Case 5: Verify Happy Flow of buying products", "DONE");
 
@@ -286,18 +286,18 @@ public class QKART_Tests {
         homePage.navigateToHome();
 
         // Find required products by searching and add them to the user's cart
-        status = homePage.searchForProduct("YONEX");
-        homePage.addProductToCart("YONEX Smash Badminton Racquet");
-        status = homePage.searchForProduct("Tan");
-        homePage.addProductToCart("Tan Leatherette Weekender Duffle");        
+        status = homePage.searchForProduct(TC5_ProductNameToSearchFor);
+        homePage.addProductToCart(TC5_ProductNameToSearchFor);
+        status = homePage.searchForProduct(TC5_ProductNameToSearchFor2);
+        homePage.addProductToCart(TC5_ProductNameToSearchFor2);        
 
         // Click on the checkout button
         homePage.clickCheckout();
 
         // Add a new address on the Checkout page and select it
         Checkout checkoutPage = new Checkout(driver);
-        checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
-        checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
+        checkoutPage.addNewAddress(TC5_AddressDetails);
+        checkoutPage.selectAddress(TC5_AddressDetails);
 
         // Place the order
         checkoutPage.placeOrder();
@@ -316,12 +316,12 @@ public class QKART_Tests {
 
         //logStatus("End TestCase", "Test Case 5: Happy Flow Test Completed : ", status ? "PASS" : "FAIL");
         //return status;
-        assertTrue(status, "Happy Flow Test Completed");
+        assertTrue(status);
     }
 
     @Test(priority=6, groups={"Regression"})
     @Parameters({"TC6_ProductNameToSearch1", "TC6_ProductNameToSearch2"})
-    public void TestCase06() throws InterruptedException {
+    public void TestCase06(String TC6_ProductNameToSearch1, String TC6_ProductNameToSearch2) throws InterruptedException {
         Boolean status;
         logStatus("Start TestCase", "Test Case 6: Verify that cart can be edited", "DONE");
         Home homePage = new Home(driver);
@@ -350,20 +350,20 @@ public class QKART_Tests {
         assertTrue(status, "Verify that cart can be edited:");
 
         homePage.navigateToHome();
-        status = homePage.searchForProduct("Xtend");
-        homePage.addProductToCart("Xtend Smart Watch");
+        status = homePage.searchForProduct(TC6_ProductNameToSearch1);
+        homePage.addProductToCart(TC6_ProductNameToSearch1);
 
-        status = homePage.searchForProduct("Yarine");
-        homePage.addProductToCart("Yarine Floor Lamp");
+        status = homePage.searchForProduct(TC6_ProductNameToSearch2);
+        homePage.addProductToCart(TC6_ProductNameToSearch2);
 
         // update watch quantity to 2
-        homePage.changeProductQuantityinCart("Xtend Smart Watch", 2);
+        homePage.changeProductQuantityinCart(TC6_ProductNameToSearch1, 2);
 
         // update table lamp quantity to 0
-        homePage.changeProductQuantityinCart("Yarine Floor Lamp", 0);
+        homePage.changeProductQuantityinCart(TC6_ProductNameToSearch2, 0);
 
         // update watch quantity again to 1
-        homePage.changeProductQuantityinCart("Xtend Smart Watch", 1);
+        homePage.changeProductQuantityinCart(TC6_ProductNameToSearch1, 1);
 
         homePage.clickCheckout();
 
@@ -389,13 +389,13 @@ public class QKART_Tests {
 
         // logStatus("End TestCase", "Test Case 6: Verify that cart can be edited: ", status ? "PASS" : "FAIL");
         // return status;
-        assertTrue(status, "Verify that cart can be edited:");
+        assertTrue(status);
     }
 
 
     @Test(priority=7, groups={"Sanity"})
     @Parameters({"TC7_ProductName", "TC7_Qty"})
-    public void TestCase07() throws InterruptedException {
+    public void TestCase07(String TC7_ProductName, int TC7_Qty) throws InterruptedException {
         Boolean status;
         logStatus("Start TestCase",
                 "Test Case 7: Verify that insufficient balance error is thrown when the wallet balance is not enough",
@@ -431,10 +431,10 @@ public class QKART_Tests {
 
         Home homePage = new Home(driver);
         homePage.navigateToHome();
-        status = homePage.searchForProduct("Stylecon");
-        homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set ");
+        status = homePage.searchForProduct(TC7_ProductName);
+        homePage.addProductToCart(TC7_ProductName);
 
-        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set ", 10);
+        homePage.changeProductQuantityinCart(TC7_ProductName, TC7_Qty);
 
         homePage.clickCheckout();
 
@@ -452,7 +452,7 @@ public class QKART_Tests {
         //         status ? "PASS" : "FAIL");
 
         // return status;
-        assertTrue(status, "Verify that insufficient balance error is thrown when the wallet balance is not enough");
+        assertTrue(status);
     }
 
 
@@ -518,7 +518,7 @@ public class QKART_Tests {
         // "Test Case 8: Verify that product added to cart is available when a new tab is opened",
         // status ? "PASS" : "FAIL");
         //takeScreenshot(driver, "EndTestCase", "TestCase08");
-        assertTrue(status, "Verify that product added to cart is available when a new tab is opened");
+        assertTrue(status);
     }
     
 
@@ -622,7 +622,7 @@ public class QKART_Tests {
         "PASS");
         //takeScreenshot(driver, "EndTestCase", "TestCase9");
 
-        assertTrue(status, "Verify that the Privacy Policy, About Us are displayed correctly");
+        assertTrue(status);
     }
 
     @Test(priority=10, groups={"Regression"})
@@ -657,11 +657,10 @@ public class QKART_Tests {
         //         "Test Case 10: Verify that contact us option is working correctly ",
         //         "PASS");
 
-        assertFalse(status, "Verify that contact us option is working correctly");
+        assertFalse(status);
 
         //takeScreenshot(driver, "EndTestCase", "TestCase10");
 
-        //return true;
     }
 
     @Test(priority=11, groups={"Sanity", "Regression"})
@@ -745,7 +744,7 @@ public class QKART_Tests {
         //         "Test Case 11:  Ensure that the links on the QKART advertisement are clickable",
         //         status ? "PASS" : "FAIL");
         // return status;
-        assertTrue(status, "Ensure that the links on the QKART advertisement are clickable");
+        assertTrue(status);
     }
 
 
